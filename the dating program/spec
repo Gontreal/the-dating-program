@@ -1,1 +1,67 @@
+Objective: 
+Build a model to simulate the match making process of modern society.
 
+For the simplicity of the model, assume each individual has 3 indices: wealth, appearence, personality.
+Each index is in the range of 1-100.
+On top of that, each individual weighs those 3 qualitires diffrently, 
+e.g. on person may care the appearence much more than the others 2 qualities, 
+while this other person may care more about  personality of its counterpart.
+As a result, there are another 3 index depicting the expectation ratios of those three qualities
+and natrally, these 3 index have a total sum of 100.
+For example:
+For a male player, a valid vector of indices of him is as following:
+(80,50,40,10,30,60)
+In which, his appearence socored as 80, wealth as 50, personality as 40
+and his expectation of the apearence of his perfect match is 10%, wealth 30% and personality 60%.
+10+30+60==100
+
+To further simplify the model, it is assumed that the information is symmetrical,
+meaning those 3 indices of each individual is public record and objective，
+and each individual choose its perfect match based on its own perception ratios.
+
+In this project, assume there are 100 male and female each.
+In the match making process, each individual select its perfect match by evaluate 3 qualities of 
+its counterpart as follow:
+Suppose a male player's profile is as follow:M(80,50,40,10,30,60)
+and a female player: F(50,60,80,40,10,50)
+Thus, the attraction level of this man towards the womman is evaluated as:
+10*50+30*60+60*80=7100
+While, the woman towards the man:
+40*80+10*50+50*40=5700
+Obviously, the perfect match for each individual is the one with the highest score.
+Additionally, if two player possess the same score of attraction, then compare the sum of those 
+3 indices: appearence+wealth+personality.
+If still the same, then the one with smaller ID wins, IDs are given as the first element of
+the profile vector of each player in the input file: male.txt and female.txt
+
+Now that we have specified the rules of finding the perfect match, the whole match making 
+process goes as following procedures:
+1.Start with the male players, specifically, going through each male player, each select his
+dream girl by applying the rules mentioned above and invite that girl.
+2.Then the female player who received the most invitations select her best suit.
+3.At this point, we find a match, remove them from the player pool.
+4.Lastly, return to step 1 and iterate through this process for the rest of the player until 
+the last man match the last woman.
+
+In this contest, it is also required that a user could input its own profile, replace a random player of the same sex, and go 
+through the process as the main charactor to find its perfect match, then ouput the result.
+the ID of the main charactor is suggested to be defined as -1 in order to be selected first in the process
+Hence, a third file, containing the profile vectors of the main charactor, is given and in those
+vectors, the first element is the sex of the player 1 for male, 0 for female.
+In all, 3 standard input files are given: male.txt, female.txt, player.txt.
+
+For testing, 2 results are given:
+the first main charactor(the first line in the player.txt) should select the player with profile as follow:
+(6,18,82,87,3,10). Please note that the id is ignoed.
+the second main charactor(the second line) should select:
+(27,74,22,22,58,20).
+
+
+
+Above is spec of the project.
+A tip from me, in the testing process,even if your program is right, you may find the result is incorrect if u replace 
+a random player with the main charactor, becaise, for example, the random player should be select out with its match 
+before the main charactor,when u replace it, but its match remains in the pool, which might change the result for the main charactor.
+So, in my friends' project, he just add the main charactor into the pool without replacing another player.
+While in my project, I replaced an specific player that has no impact on the result of the main charactor, after I had went thru
+my friend's approach.
